@@ -4,15 +4,15 @@ on:
   workflow_dispatch:
     inputs:
       target-env:
+        description: 'Target environment'
+        required: true
+        default: 'pre'
         type: environment
-        default: pre
-
-run-name: Working with Environments | env - ${{ inputs.target-env }}
 
 jobs:
   echo:
     runs-on: ubuntu-latest
-    environment: ${{ inputs.target-env }}
+    environment: ${{ github.event.inputs.target-env }}
     env:
       my-env-value: ${{ vars.MY_ENV_VALUE || 'default value' }}
     steps:
